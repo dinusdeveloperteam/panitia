@@ -4,8 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Panitia extends CI_Model
 {
 
-    // kelola dashboard
-
     // kelola pelelang
     function pelelang()
     {
@@ -72,23 +70,32 @@ class Panitia extends CI_Model
     {
         return $this->db->get_where('lelang', ['lelang_id' => $lelang_id])->row_array();
     }
+
     //kelola penawaran
     function penawaran()
     {
         $query = "SELECT l.lelang_id,produk,deskripsi_produk,image1,image2,image3,image4,harga_beli_sekarang,lb.harga_tawar,l.status FROM lelang l,lelang_bid lb WHERE l.lelang_id=lb.lelang_id";
         return $this->db->query($query)->result_array();
     }
+
+     //kelola penawaran
+     function deletePenawaran($lelang_id)
+     {
+         return $this->db->query("DELETE l, lb FROM lelang JOIN lelang_bid lb ON l.lelang_id=lb.lelang_id WHERE l.lelang_id=$lelang_id");
+     }
+
     //kelola pemenang
     function pemenang()
     {
-        $query = $this->db->get('lelang_pemenang');
-        return $query->result();
+        
+        $query = "SELECT lp.*,p.*,p.email FROM lelang_pemenang lp,peserta p WHERE lp.peserta_id=p.peserta_id;";
+        return $this->db->query($query)->result();
     }
 
     //Kelola Pembayaran
     function pembayaran()
     {
-        $query = "SELECT lb.*,lm.*,l.produk,p.nama as nama_peserta FROM lelang_pembayaran lb,lelang_pemenang lm,lelang l,peserta p where lb.lelang_id=lm.lelang_id and lm.peserta_id=p.peserta_id and l.lelang_id=lb.lelang_id;";
+        $query = "SELECT lb.*,lm.*,l.produk,p.nama as nama_peserta FROM lelang_pembayaran lb,lelang_pemenang lm,lelang l,peserta p where lb.lelang_id=lm.lelang_id and lm.peserta_id=p.peserta_id and l.lelang_id=lb.lelang_id";
         return $this->db->query($query)->result_array();
     }
 
@@ -102,11 +109,20 @@ class Panitia extends CI_Model
         return $this->db->delete('lelang', ['lelang_id' => $lelang_id]);
     }
 
+    // Kelola penerima lelang
+
     function penerima()
     {
         $query = "SELECT lp.*,p.*,p.nama,lp.konfirmasi_terimaproduk FROM lelang_pemenang lp,peserta p WHERE lp.peserta_id=p.peserta_id";
         return $this->db->query($query)->result_array();
-    } 
+    }
+
+    function deletePenerima($peserta_id)
+    {
+        return $this->db->query("DELETE lp, p FROM lelang_pemenang lp JOIN peserta p ON lp.peserta_id=p.peserta_id WHERE lp.peserta_id=$peserta_id");
+    }
+
+    // Kelola riwayat lelang
 
     function riwayat()
     {
@@ -125,5 +141,32 @@ class Panitia extends CI_Model
     {
         return $this->db->delete('lelang_pengiriman', ['pengiriman_id' => $lelang_id]);
     }
-
+    function sendEmail($to_email)
+    {
+        $from_email = 'lelangikan222@gmail.com'; //change this to yours
+        $subject = 'Surat Pengiriman';
+        // $to_email=$this->input->post('email');
+        $message = 'Kepada Peserta,<br /><br />Selamat anda pemenang lelang<br /><br /> http://localhost/lelang-ikan/register'  . '<br /><br /><br />Terima kasih<br />';
+        
+        //configure email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.googlemail.com'; //smtp host name
+        $config['smtp_port'] = '465'; //smtp port number
+        $config['smtp_user'] = 'lelangikan222@gmail.com';
+        $config['smtp_pass'] = 'kbjidqivoreymhud'; //$from_email password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'iso-8859-1';
+        $config['wordwrap'] = TRUE;
+        $config['newline'] = "\r\n"; //use double quotes
+        $this->email->initialize($config);
+        
+        //send mail
+        $this->email->from($from_email, 'Lelang Ikan');
+        $this->email->to($to_email);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        return $this->email->send();
+    }
+    
 }
+

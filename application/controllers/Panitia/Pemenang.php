@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
 class Pemenang extends CI_Controller
 {
     function __construct()
@@ -8,6 +9,9 @@ class Pemenang extends CI_Controller
         parent::__construct();
         $this->load->model('panitia/Panitia');
         $this->load->helper('url');
+        $this->load->library(array('session', 'form_validation', 'email'));
+        $this->load->database();
+        
     }
     public function index()
     {
@@ -19,12 +23,13 @@ class Pemenang extends CI_Controller
             'title' => $page,
             'breadcrumb' => $page
         ];
+        
        
         $data['user'] = $this->Panitia->user_panitiaById($this->session->panitia_id);
         $this->load->view('panitia/partials/start', $data);
         $this->load->view('panitia/kelola_lelang/pemenang', $data);
         $this->load->view('panitia/partials/end');
-    }
+        }
     public function deletepemenang($id)
     {
         $this->panitia->deletepemenang($id);
@@ -46,8 +51,41 @@ class Pemenang extends CI_Controller
             $this->db->where('lelang_id', $id);
             $this->db->update('lelang_pemenang');
             $this->session->set_flashdata('flash', '<div class="alert alert-success" role="alert">Order Berhasil Terupdate!</div>');
-            redirect('panitia/pemenang/');
+            // if ($this->Panitia->sendEmail($this->input->post('email')))
+            // {
+            //     // successfully sent mail
+            //     $this->session->set_flashdata('msg','<div class="alert alert-success text-center">Email Terkirim</div>');
+            //     redirect('panitia/pemenang');
+            // }
+            // else
+            // {
+            //     // error
+            //     $this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Error.  Coba Lagi!!</div>');
+            //     redirect('panitia/pemenang');
+            // }
+            
         }
 
     }
+    public function VerifyEmail(){
+        if ($this->Panitia->sendEmail($this->input->post('email')))
+        {
+            // successfully sent mail
+            $this->session->set_flashdata('msg','<script>alert("Success terkirim")</script>');
+            
+            redirect('panitia/pemenang'); 
+           
+        }
+        else
+        {
+            // error
+            $this->session->set_flashdata('msg','<script>alert("Gagal Terkirim")</script>');
+            
+            redirect('panitia/pemenang');
+
+            
+        }
+    }
+    
+    
 }

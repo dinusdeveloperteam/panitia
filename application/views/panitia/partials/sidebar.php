@@ -1,9 +1,9 @@
 <nav class="sidebar sidebar-offcanvas fixed-left" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
-            <a href="<?php echo base_url('dashboard.php') ?>" class="nav-link">
+            <a href="<?= base_url('dashboard.php') ?>" class="nav-link">
                 <div class="nav-profile-image">
-                    <img src="<?php echo base_url('vendors/adminassets/assets/images/faces/face1.jpg') ?>" alt="profile">
+                    <img src="<?= ($user->foto != "" ? base_url($user->foto) : base_url('vendors/images/profile.png')) ?>" alt="profile">
                     <span class="login-status online"></span>
                     <!--change to offline or busy as needed-->
                 </div>
@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('panitia/dashboard') ?>">
+            <a class="nav-link" href="<?= base_url('panitia/dashboard') ?>">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
@@ -59,6 +59,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('panitia/pembayaran') ?>">Pembayaran Lelang</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('panitia/pembayaran') ?>">Hasil Lelang</a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -80,7 +83,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('panitia/riwayat') ?>">
+            <a class="nav-link" href="<?= base_url('panitia/riwayat') ?>">
                 <span class="menu-title">Riwayat Lelang</span>
                 <i class="mdi mdi-equal-box menu-icon"></i>
             </a>

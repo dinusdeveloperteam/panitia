@@ -28,7 +28,6 @@ class Penawaran extends CI_Controller
     public function deletepenawaran($id)
     {
         $this->panitia->deletepenawaran($id);
-        // ayra $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Pembayaran dengan kode ' . $id . ' berhasil dihapus!</div>');
         redirect('panitia/kelola_lelang/penawaran');
     }
     public function edit($id)

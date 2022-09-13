@@ -138,11 +138,11 @@
                                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h4>Yakin ingin menghapus Pembayaran dengan ID "<?= $row['peserta_id'] ?>" ?</h4>
+                                                        <h4>Yakin ingin menghapus data?</h4>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
-                                                        <a href="<?= base_url() ?>panitia/penerima/<?= $row['peserta_id']; ?>" class="btn btn-danger">Ya</a>
+                                                        <a href="<?= base_url() ?>panitia/penerima/delete/<?= $row['peserta_id'] ?>" class="btn btn-danger">Ya</a>
                                                     </div>
                                                 </div>
                                             </div>

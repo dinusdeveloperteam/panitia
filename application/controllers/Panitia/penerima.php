@@ -25,12 +25,7 @@ class Penerima extends CI_Controller
         $this->load->view('panitia/kelola_lelang/penerima', $data);
         $this->load->view('panitia/partials/end');
     }
-    public function deletepemenang($id)
-    {
-        $this->panitia->deletepemenang($id);
-        // ayra $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Pembayaran dengan kode ' . $id . ' berhasil dihapus!</div>');
-        redirect('panitia/pemenang');
-    }
+
     public function edit($id)
     {
         $this->form_validation->set_rules('konfirmasi_terimaproduk', 'Status Order', 'required');
@@ -45,5 +40,11 @@ class Penerima extends CI_Controller
             redirect('panitia/penerima/');
         }
 
+    }
+
+    public function delete($peserta_id)
+    {
+        $this->Panitia->deletePenerima($peserta_id);
+        redirect('panitia/penerima');
     }
 }
