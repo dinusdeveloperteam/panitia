@@ -19,6 +19,7 @@ class Pembayaran extends CI_Controller
             'title' => $page,
             'breadcrumb' => $page
         ];
+
        
         $data['user'] = $this->Panitia->user_panitiaById($this->session->panitia_id);
         $this->load->view('panitia/partials/start', $data);

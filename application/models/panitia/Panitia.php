@@ -88,11 +88,12 @@ class Panitia extends CI_Model
     function pemenang()
     {
         
-        $query = "SELECT lp.*,p.*,p.email FROM lelang_pemenang lp,peserta p WHERE lp.peserta_id=p.peserta_id;";
+        $query = "SELECT lp.*,p.*,p.email FROM lelang_pemenang lp,peserta p WHERE lp.peserta_id=p.peserta_id";
         return $this->db->query($query)->result();
     }
 
     //Kelola Pembayaran
+
     function pembayaran()
     {
         $query = "SELECT lb.*,lm.*,l.produk,p.nama as nama_peserta FROM lelang_pembayaran lb,lelang_pemenang lm,lelang l,peserta p where lb.lelang_id=lm.lelang_id and lm.peserta_id=p.peserta_id and l.lelang_id=lb.lelang_id";

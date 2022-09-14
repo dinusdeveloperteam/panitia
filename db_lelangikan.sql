@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2022 at 08:20 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Generation Time: Sep 14, 2022 at 08:11 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,8 +32,17 @@ CREATE TABLE `admin` (
   `nama` varchar(60) NOT NULL,
   `telp` varchar(20) NOT NULL,
   `username` char(20) NOT NULL,
-  `password` char(255) NOT NULL
+  `password` char(255) NOT NULL,
+  `role` int(7) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`userid`, `nama`, `telp`, `username`, `password`, `role`) VALUES
+('1', 'admin', '089', 'admin', 'admin', 1),
+('211', 'admin1', '0813454678876', 'admin1', '25d55ad283aa400af464c76d713c07ad', 1);
 
 -- --------------------------------------------------------
 
@@ -88,13 +97,8 @@ CREATE TABLE `lelang` (
 --
 
 INSERT INTO `lelang` (`lelang_id`, `pelelang_id`, `produk`, `deskripsi_produk`, `image1`, `image2`, `image3`, `image4`, `harga_awal`, `harga_minimal_diterima`, `incremental_value`, `tgl_mulai`, `tgl_selesai`, `harga_beli_sekarang`, `metode_bayar`, `status`, `panitia_id`, `keterangan`, `jumlah`) VALUES
-('LL-2022-00002', '1', 'Ikan Mas Jumbo', 'Ikan Mas kualitas terbaik sepanjang masa', 'ikanmas1.jpg', '', '', '', 10000, 20000, 1000, '0000-00-00 00:00:00', '2022-08-27 11:46:00', 30000, 0, 0, '', '', NULL),
-('LL-2022-00003', '2', 'Ikan Nila Merah', 'Ikan Nila merah paling berkualitas se Indonesia Raya', 'ikannila1.jpg', '', '', '', 50000, 70000, 1000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 100000, 0, 0, '', '', NULL),
-('LL-2022-00004', '3', 'Ikan Lele Dumbo', 'Ikan Lele Dumbo dengan kualitas terbaik sedunia', 'lele.jpg', 'lele.jpg', 'koi.jpg', 'louhan.jpg', 100000, 200000, 2000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 300000, 0, 0, '', '', NULL),
-('LL-2022-00005', '4', 'Ikan Koi', 'Ikan Koi pemenang lomba tingkat dunia?', 'koi.jpg', '', '', '', 10000000, 25000000, 500000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 40000000, 0, 0, '', '', NULL),
-('LL-2022-00006', '5', 'Ikan Cupang', 'Ikan Cupang pemenang lomba antar RT', 'cupang.jpg', '', '', '', 100000, 300000, 1000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 500000, 0, 0, '', '', NULL),
-('LL-2022-00007', '6', 'Ikan Louhan', 'Ikan Louhan termahal di dunia karena pemenang kontes terbesar sedunia', 'louhan.jpg', '', '', '', 1000000000, 3000000000, 1000000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5000000000, 0, 0, '', '', NULL),
-('LL-2022-00008', '7', 'Ikan Toman', 'Ikan Toman, sang predator nan menawan', 'toman.jpg', '', '', '', 300000, 700000, 1000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1100000, 0, 0, '', '', NULL);
+('LL-2022-00002', 'gfg', 'fgf', 'gfg', 'gfgf', 'gfg', 'gfg', 'fgfg', 434343, 3434, 43434, '2022-09-07 07:25:13', '2022-09-07 07:25:13', 34343, 545454545, 1, 'fggfg', 'gfgf', 434343),
+('LL-2022-00003', 'PSY-2022-00004', 'ikan betina', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-07 08:49:33', '2022-09-07 08:49:33', 18000, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -139,7 +143,7 @@ CREATE TABLE `lelang_pembayaran` (
 --
 
 INSERT INTO `lelang_pembayaran` (`lelang_id`, `tgl_pembayaran`, `nominal_dibayarkan`, `bukti_pembayaran`, `panitia_id`) VALUES
-('LL-2022-00002', '2022-08-25', 250000, 'image1-18-08-20221660791614.jpeg', 'PL-2022-00001');
+('LL-2022-00002', '2022-09-14', 50000, 'dfdf', '2323');
 
 -- --------------------------------------------------------
 
@@ -169,8 +173,33 @@ CREATE TABLE `lelang_pemenang` (
 --
 
 INSERT INTO `lelang_pemenang` (`lelang_id`, `peserta_id`, `tgl_diumumkan`, `bukti_bayar`, `tgl_bayar`, `provinsi_kirim`, `kota_kirim`, `kecamatan_kirim`, `kelurahan_kirim`, `alamat_kirim`, `status`, `konfirmasi_terimaproduk`, `testimoni_pemenang`, `panitia_id`) VALUES
-('1', '1', '2022-08-29 10:00:00', '', '2022-08-28', 'Jawa Tengah', 'Semarang', 'Semarang Tengah', 'Pendrikan Kidul', 'Jalan Arjuna 26', 0, 0, 'Keren ikannya keliatan sehat dan gemuk banget kayak saya hehe', 'PL-2022-00001'),
-('LL-2022-00002', 'PSY-2022-00002', '2022-08-24 10:32:08', 'image1-18-08-20221660791614.jpeg', '2022-08-25', 'Jawa Tengah', 'Pemalang', 'Mulyoharjo', 'Pemalang', 'Jalan Bangkit 1', 1, 2, 'Keren!!!!!', 'PL-2022-00001');
+('LL-2022-00002', 'PSY-2022-00003', '2022-08-24 10:32:08', 'image1-18-08-20221660791614.jpeg', '2022-08-25', 'Jawa Tengah', 'Pemalang', 'Mulyoharjo', 'Pemalang', 'Jalan Bangkit 1', 1, 1, 'Keren!!!!!', 'PL-2022-00001');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lelang_pengiriman`
+--
+
+CREATE TABLE `lelang_pengiriman` (
+  `pengiriman_id` char(100) NOT NULL,
+  `lelang_id` char(100) NOT NULL,
+  `pelelang_id` char(100) NOT NULL,
+  `nama` varchar(150) NOT NULL,
+  `no_polisi` varchar(100) NOT NULL,
+  `nama_kendaraan` varchar(150) NOT NULL,
+  `no_hp` int(13) NOT NULL,
+  `no_telp_driver` int(25) NOT NULL,
+  `status_transaksi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lelang_pengiriman`
+--
+
+INSERT INTO `lelang_pengiriman` (`pengiriman_id`, `lelang_id`, `pelelang_id`, `nama`, `no_polisi`, `nama_kendaraan`, `no_hp`, `no_telp_driver`, `status_transaksi`) VALUES
+('1', 'LL-2022-00002', '1', '1', '1', '1', 1, 0, 1),
+('3', 'LL-2022-00003', '1', 'DS', 'DS', 'DS', 34, 343, 1);
 
 -- --------------------------------------------------------
 
@@ -189,6 +218,13 @@ CREATE TABLE `panitia` (
   `username` char(20) NOT NULL,
   `password` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `panitia`
+--
+
+INSERT INTO `panitia` (`panitia_id`, `nik`, `nama`, `instansi`, `jabatan`, `jeniskel`, `foto`, `username`, `password`) VALUES
+('2323', '231212512', 'Sakyamous', 'Pemeritah', 'yntks', 'L', 'assets/uploads/panitia/image1-02-09-2022-1662104015.png', 'test', 'haha123');
 
 -- --------------------------------------------------------
 
@@ -226,7 +262,7 @@ CREATE TABLE `pelelang` (
 --
 
 INSERT INTO `pelelang` (`pelelang_id`, `nik`, `nama`, `jenis`, `provinsi`, `kota`, `kecamatan`, `kelurahan`, `alamat`, `telp`, `email`, `npwp`, `norekening`, `bank`, `atasnama`, `filektp`, `filenpwp`, `fileSIUP`, `status`, `deskripsi`, `username`, `password`) VALUES
-('PL-2022-00001', '2983242', 'abc', 1, 'coba', 'coba', 'coba', 'coba', 'coba', '0912731', 'exam@gmail.com', '111', '12121', 'BRI', 'test', 'image1-19-08-20221660875827.jpeg', 'image2-19-08-20221660875827.jpeg', 'image3-19-08-20221660875827.jpeg', 1, '12131vhvnsdmndmnadaad', '123', '412f0b4b3ff4653b4618df4eecdccc6e');
+('PL-032353-24141', '2143E14', 'GGGFGF', 1, 'DSDFSDS', 'DFSDFS', 'gdf', 'dfdf', 'dfgdfgdfg', 'dfgdfgdfg', 'dfdfgdfgdfdfg', 'dfgdfg', 'dfgdfg', 'dfgdfg', 'dfgdfdfgdfgdf', '', '', '', 2, '', 'frdgdf123', 'fdgd123');
 
 -- --------------------------------------------------------
 
@@ -260,10 +296,7 @@ CREATE TABLE `peserta` (
 --
 
 INSERT INTO `peserta` (`peserta_id`, `nik`, `nama`, `jeniskel`, `provinsi`, `kota`, `kecamatan`, `kelurahan`, `alamat`, `telp`, `email`, `npwp`, `filektp`, `filenpwp`, `deposit`, `status`, `username`, `password`) VALUES
-('1', '000', 'Agus', 'L', 'Jawa Tengah', 'Semarang', 'Semarang Tengah', 'Pendrikan Kidul', 'Jalan Arjuna', '000', '000@gmail.com', '000', '', '', 500000, 1, 'qq', '412f0b4b3ff4653b4618df4eecdccc6e'),
-('2', '222', 'Santo', 'L', 'Jawa Tengah', 'Jepara', 'xxxx', 'xxxx', 'xxxx', '111', '111@gmail.com', '111', '', '', 100000, 1, 'santo', 'ea07ff4e27d0bcf5f786f39e44e031f1'),
-('3', '111', 'Susan', 'P', 'Jawa Tengah', 'Wonosobo', 'Watumalang', 'Ndero', 'Ndero Ngisor', '222', '222@gmail.com', '222', '', '', 200000, 0, '', ''),
-('PSY-2022-00001', '333333333333', 'Purwa', '', '', '', '', '', 'Jalan Parakan 158', '085713607109', 'purwa@gmail.com', '', '', '', 0, 1, 'purwa', '0a1c5976af7c9d8c51a717f5e5322c7e');
+('PSY-2022-00003', '3232312', 'Sakya', 'P', 'Jawa Tengah', 'Semarang', 'dfdf', 'dfdf', 'dfdf', '', 'lapakikann@gmail.com', '', '', '', 0, 1, 'test', '');
 
 -- --------------------------------------------------------
 
@@ -281,6 +314,13 @@ CREATE TABLE `peserta_deposit` (
   `panitia_id` char(20) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `peserta_deposit`
+--
+
+INSERT INTO `peserta_deposit` (`deposit_id`, `peserta_id`, `tgl_deposit`, `nominal_deposit`, `bukti_pembayaran`, `status`, `panitia_id`, `keterangan`) VALUES
+(1, 'PSY-2022-00003', '2022-09-01', 90000, 'bayar.png', 1, '2323', 'test');
 
 --
 -- Indexes for dumped tables
@@ -315,6 +355,12 @@ ALTER TABLE `lelang_pembayaran`
 --
 ALTER TABLE `lelang_pemenang`
   ADD PRIMARY KEY (`lelang_id`);
+
+--
+-- Indexes for table `lelang_pengiriman`
+--
+ALTER TABLE `lelang_pengiriman`
+  ADD PRIMARY KEY (`pengiriman_id`);
 
 --
 -- Indexes for table `panitia`
@@ -354,7 +400,7 @@ ALTER TABLE `lelang_bid`
 -- AUTO_INCREMENT for table `peserta_deposit`
 --
 ALTER TABLE `peserta_deposit`
-  MODIFY `deposit_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `deposit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
