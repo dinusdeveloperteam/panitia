@@ -30,9 +30,9 @@
                                         <td><?= $row['peserta_id'] ?></td>
                                         <td><?php
                                             if ($row['konfirmasi_terimaproduk'] == 0) {
-                                                echo 'Belum Diterima';
+                                                echo "<span class='badge badge-danger'>Belum Diterima</span>";
                                             } else if ($row['konfirmasi_terimaproduk'] == 1) {
-                                                echo 'Sudah Diterima';
+                                                echo "<span class='badge badge-success'>Sudah Diterima</span>";
                                             }
                                             ?>
                                         </td>

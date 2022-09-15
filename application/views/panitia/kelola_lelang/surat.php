@@ -17,7 +17,7 @@
                                         <th>Nama</th>
                                         <th>ID Lelang</th>
                                         <th>ID Pelelang</th>
-                                        <th>ID Pengirimkan</th>
+                                        <th>ID Pengiriman</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -32,18 +32,21 @@
                                         <td><?= $row['pengiriman_id'] ?></td>
                                         <td><?php
                                             if ($row['status_transaksi'] == 0) {
-                                                echo 'Belum diproses';
+                                                echo "<span class='badge badge-secondary'>Belum Diproses</span>";
                                             } else if ($row['status_transaksi'] == 1) {
-                                                echo 'Sedang diproses ';
+                                                echo "<span class='badge badge-primary'>Sedang Diproses</span>";
                                             } else if ($row['status_transaksi'] == 2) {
-                                                echo 'Sedang dikirim';
+                                                echo "<span class='badge badge-warning'>Sedang Dikirim</span>";
                                             } else if ($row['status_transaksi'] == 3) {
-                                                echo 'Telah diterima';
+                                                echo "<span class='badge badge-success'>Telah DiTerima</span>";
                                             }
                                             ?>
                                         </td>
 
-                                        <td><a href="#" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#editMenuModal<?= $row['lelang_id'] ?>"><i class="fas fa-edit"></i>Ubah</a><a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletepenjualModal<?= $row['lelang_id'] ?>"><i class="fas fa-trash-can"></i>Hapus</a></td>
+                                        <td><a href="#" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#editMenuModal<?= $row['lelang_id'] ?>"><i class="fas fa-edit"></i>Ubah</a>
+                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletepenjualModal<?= $row['lelang_id'] ?>"><i class="fas fa-trash-can"></i>Hapus</a>
+                                        <a href="#" class="btn btn-sm btn-success " data-toggle="modal" data-target="#notifEmail"><i class="fas fa-trash-can"></i>Kirim</a>
+                                    </td>
                                         <!-- Edit Menu Modal -->
                                         <div class="modal fade" id="editMenuModal<?= $row['lelang_id'] ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                             <div class="modal-dialog modal-xl">
@@ -159,9 +162,31 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--untuk kirim email-->
+                                        <div class="modal fade" id="notifEmail" tabindex="-1" role="dialog" aria-labelledby="loginpelelangLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Kirim Notifikasi Email Pelelang</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="<?= base_url('Panitia/pemenang/VerifyEmail/') ?>" method="post">
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="<?= $row['email'] ?>" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                                                </div>
+                                                                <?php echo $this->session->flashdata('msg'); ?>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                         <!-- End Detail -->
-
-
                                         <div class="modal fade" id="deletepenjualModal<?= $row['pengiriman_id'] ?>" tabindex="-1" aria-labelledby="deletepenjualModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content bg-light">

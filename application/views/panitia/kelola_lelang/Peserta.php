@@ -17,6 +17,7 @@
                                         <th>No</th>
                                         <th>ID Peserta</th>
                                         <th>Nama</th>
+                                        <th>Jenis Kelamin</th>
                                         <th>provinsi</th>
                                         <th>Kota</th>
                                         <th>Status</th>
@@ -26,66 +27,198 @@
                                 <tbody>
                                     <?php
                                     $count = 0;
-                                    foreach ($peserta as $u) {
+                                    foreach ($peserta as $row) {
                                         $count = $count + 1;
                                     ?>
                                         <tr>
                                             <td><?= $count ?></td>
-                                            <td><?= $u->peserta_id ?></td>
-                                            <td><?= $u->nama ?></td>
-                                            <td><?= $u->provinsi ?></td>
-                                            <td><?= $u->kota ?></td>
+                                            <td><?= $row->peserta_id ?></td>
+                                            <td><?= $row->nama ?></td>
+                                            <td><?php
+                                                if ($row->jeniskel == 'L') {
+                                                    echo "Laki - Laki";
+                                                } else if ($row->jeniskel == 'P') {
+                                                    echo "Perempuan";
+                                                }
+                                                ?></td>
+                                            <td><?= $row->provinsi ?></td>
+                                            <td><?= $row->kota ?></td>
                                             <td>
-                                                <?php if ($u->status == 0) {
+                                                <?php if ($row->status == 0) {
                                                     echo "<span class='badge badge-secondary'>Belum Terverifikasi</span>";
-                                                } else if ($u->status == 1) {
+                                                } else if ($row->status == 1) {
                                                     echo "<span class='badge badge-success'>Terverifikasi</span>";
-                                                } else if ($u->status == 2) {
+                                                } else if ($row->status == 2) {
                                                     echo "<span class='badge badge-warning'>Di tolak</span>";
-                                                } else if ($u->status == 3) {
+                                                } else if ($row->status == 3) {
                                                     echo "<span class='badge badge-danger'>Di banned</span>";
                                                 } else {
-                                                    echo "Unknown";
+                                                    echo "Status Tidak Diketahui";
                                                 }
                                                 ?></td>
                                             <td>
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="<?= base_url() ?>panitia/peserta/detail/<?= $u->peserta_id ?>" class="btn btn-warning btn-sm">
-                                                        <i class="mdi mdi-account-edit"></i>
-                                                    </a>&emsp;
-                                                    <a href="<?= base_url() ?>panitia/peserta/hapusPeserta/<?= $u->peserta_id ?>" onclick="return confirm('Yakin Hapus data')" class="btn btn-danger btn-sm">
-                                                        <i class="mdi mdi-delete-forever"></i>
-                                                    </a>
-                                                </div>
+                                                <a href="#" class="btn btn-sm btn-warning " data-toggle="modal" data-target="#editMenuModal<?= $row->peserta_id ?>"><i class="fas fa-edit"></i>Ubah</a>
+                                                <a href="#" class="btn btn-sm btn-danger " data-toggle="modal" data-target="#deletepenjualModal<?= $row->peserta_id ?>"><i class="fas fa-trash-can"></i>Hapus</a>
+                                                </a>
                                             </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                            <!-- Edit Menu Modal -->
+                                            <div class="modal fade" id="editMenuModal<?= $row->peserta_id ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content bg-default">
+                                                        <div class="modal-header ">
+                                                            <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Peserta Lelang</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body text-dark font-weight-bold">
+                                                            <form action="<?= base_url('panitia/peserta/edit/' . $row->peserta_id) ?>" method="POST">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <label for="basic-url">ID Peserta </label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="peserta_id" id="peserta_id" value="<?= $row->peserta_id ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Nama</label><br>
+                                                                            <div class="input-group mb-1">
+                                                                                <input type="text" class="form-control" name="peserta_id" id="peserta_id" value="<?= $row->nama ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">Username</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="email" value="<?= $row->username ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">Jenis Kelamin</label><br>
+                                                                            <div class="input-group mb-1">
+                                                                                <select class="custom-select" name="jeniskel" id="jeniskel">
+                                                                                    <option value="<?= $row->jeniskel ?>"><?php
+                                                                                                                            if ($row->jeniskel == 'L') {
+                                                                                                                                echo "Laki - Laki";
+                                                                                                                            } else if ($row->jeniskel == 'P') {
+                                                                                                                                echo "Perempuan";
+                                                                                                                            }
+                                                                                                                            ?></option>
+                                                                                    <option value="L">Laki - Laki</option>
+                                                                                    <option value="P">Perempuan</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <label for="basic-url">NIK</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->nik ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">TELP</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->telp ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">Email</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="provinsi_kirim" id="provinsi_kirim" value="<?= $row->email ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <label for="incremental_value">Kelurahan</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kota_kirim" id="kota_kirim" value="<?= $row->kelurahan ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Kecamatan</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->kecamatan ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Kota</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->kota ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Provinsi</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->provinsi ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Alamat</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->alamat ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Nomor NPWP</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->npwp ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">File KTP</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <img src="<?= base_url('assets/uploads/peserta/' . $row->filektp) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="File KTP <?= $row->filektp ?>">
+                                                                            </div>
+                                                                            <label for="basic-url">File NPWP</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <img src="<?= base_url('assets/uploads/peserta/' . $row->filenpwp) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="File NPWP <?= $row->filenpwp ?>">
+                                                                            </div>
+                                                                            <label for="basic-url">Status Dibayarkan</label><br>
+                                                                            <div class="input-group mb-1">
+                                                                                <select class="custom-select" name="status" id="status">
+                                                                                    <option value="<?= $row->status ?>"><?php
+                                                                                                                        if ($row->status == 0) {
+                                                                                                                            echo 'Belum Diverifikasi';
+                                                                                                                        } else if ($row->status == 1) {
+                                                                                                                            echo 'Terverifikasi';
+                                                                                                                        } else if ($row->status == 2) {
+                                                                                                                            echo 'Ditolak';
+                                                                                                                        } else if ($row->status == 3) {
+                                                                                                                            echo 'Dibanned';
+                                                                                                                        } else {
+                                                                                                                            echo 'Status Tidak Diketahui';
+                                                                                                                        }
+                                                                                                                        ?></option>
+                                                                                    <option value="0">Belum Diverifikasi</option>
+                                                                                    <option value="1">Terverifikasi</option>
+                                                                                    <option value="2">Ditolak</option>
+                                                                                    <option value="3">Dibanned</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                                </form>
+                                            </div>
                         </div>
+                        </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                    </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Delete -->
-    <div class="modal fade" id="hapusPesertaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span>Yakin ingin hapus data?</span>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <a href="<?= base_url() ?>panitia/peserta/hapusPeserta/<?= $u->peserta_id ?>" class="btn btn-danger">Hapus</a>
-                </div>
+</div>
+<!-- Modal Delete -->
+<div class="modal fade" id="hapusPesertaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span>Yakin ingin hapus data?</span>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <a href="<?= base_url() ?>panitia/peserta/hapusPeserta/<?= $row->peserta_id ?>" class="btn btn-danger">Hapus</a>
             </div>
         </div>
     </div>
-    <!-- End Modal Delete -->
+</div>
+<!-- End Modal Delete -->

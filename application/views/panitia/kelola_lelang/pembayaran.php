@@ -40,11 +40,11 @@
                                             <td><?= $v['bukti_pembayaran'] ?></td>
                                             <td> <?php
                                                     if ($v['status'] == 0) {
-                                                        echo 'Belum dibayar';
+                                                        echo "<span class='badge badge-secondary'>Belum Dibayar</span>";
                                                     } else if ($v['status'] == 1) {
-                                                        echo 'Telah dibayar';
+                                                        echo "<span class='badge badge-success'>Telah Diperiksa</span>";
                                                     } else if ($v['status'] == 2) {
-                                                        echo 'Ditolak';
+                                                        echo "<span class='badge badge-danger'>Ditolak</span>";
                                                     }else{
                                                         echo 'Data tidak diketahui';
                                                     }

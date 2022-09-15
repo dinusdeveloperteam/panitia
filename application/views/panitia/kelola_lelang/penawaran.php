@@ -46,11 +46,11 @@
                                         <td><?= $row['harga_tawar'] ?></td>
                                         <td><?php
                                             if ($row['status'] == 0) {
-                                                echo 'Tidak Disetujui';
+                                                echo "<span class='badge badge-danger'>Tidak Disetujui</span>";
                                             } else if ($row['status'] == 1) {
-                                                echo 'Disetujui';
+                                                echo "<span class='badge badge-success'>Disetujui</span>";
                                             } else {
-                                                echo 'Belum Diketahui';
+                                                echo "<span class='badge badge-secondary'>Belum Diketahui</span>";
                                             }
                                             ?></td>
                                         <td><a href="#" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#editMenuModal<?= $row['lelang_id'] ?>"><i class="fas fa-edit"></i>Ubah</a><a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deletepenjualModal<?= $row['lelang_id'] ?>"><i class="fas fa-trash-can"></i>Hapus</a></td>

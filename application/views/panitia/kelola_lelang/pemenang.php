@@ -37,19 +37,21 @@
                                             <td><?= $row->tgl_diumumkan ?></td>
                                             <td><?= $row->tgl_bayar ?></td>
                                             <td><?= $row->testimoni_pemenang ?></td>
-                                            <?php if ($row->konfirmasi_terimaproduk == 0) {
-                                            ?>
-                                                <td class="text-danger">Belum diterima</td>
-                                            <?php } else { ?>
-                                                <td class="text-success">Sudah diterima</td>
-                                            <?php } ?>
+                                            <td><?php
+                                                    if ($row->konfirmasi_terimaproduk == 0) {
+                                                        echo "<span class='badge badge-danger'>Belum Diterima</span>";
+                                                    } else if ($row->konfirmasi_terimaproduk == 1) {
+                                                        echo "<span class='badge badge-success'>Sudah Diterima</span>";
+                                                    }
+                                                    ?></td>
 
-                                            <?php if ($row->status == 0) {
-                                            ?>
-                                                <td class="text-danger">Belum Dibayar</td>
-                                            <?php } else { ?>
-                                                <td class="text-success">Telah dibayar</td>
-                                            <?php } ?>
+                                            <td><?php
+                                                    if ($row->status  == 0) {
+                                                        echo "<span class='badge badge-danger'>Belum Dibayar</span>";
+                                                    } else if ($row->status  == 1) {
+                                                        echo "<span class='badge badge-success'>Sudah Dibayar</span>";
+                                                    }
+                                                    ?></td>
                                             <td>
                                                 <div style="">
                                                     <a href="#" class="btn btn-sm btn-warning " data-toggle="modal" data-target="#editMenuModal<?= $row->lelang_id ?>"><i class="fas fa-edit"></i>Ubah</a>
@@ -61,7 +63,7 @@
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content bg-default">
                                                             <div class="modal-header ">
-                                                                <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pe Lelang</h5>
+                                                                <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pemenang Lelang</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -69,7 +71,7 @@
                                                             <div class="modal-body text-dark font-weight-bold">
                                                                 <?php
                                                                 ?>
-                                                                <form action="<?= base_url('panitia/pemenang/edit/' . $row->lelang_id) ?>" method="POST">
+                                                                <form action="<?= base_url('Panitia/pemenang/edit/' . $row->lelang_id) ?>" method="post">
                                                                     <div class="modal-body">
                                                                         <div class="row">
                                                                             <div class="col-6">
@@ -156,7 +158,7 @@
                                                                                                                             }
                                                                                                                             ?></option>
                                                                                         <option value="0">Belum Dibayar</option>
-                                                                                        <option value="1">Telah Dibayar</option>
+                                                                                        <option value="1">Sudah Dibayar</option>
                                                                                         <option value="2">Ditolak</option>
                                                                                     </select>
                                                                                 </div><br>

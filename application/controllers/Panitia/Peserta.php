@@ -43,8 +43,9 @@ class Peserta extends CI_Controller
     {
         $id = $this->uri->segment(4);
         $data = [
-            'status' => $this->input->post('status')
+            'status' => $this->input->post('status'),'jeniskel' => $this->input->post('jeniskel')
         ];
+        $this->db->set('jeniskel', $this->input->post('jeniskel', true));
         $this->db->where('peserta_id', $id);
         $this->db->update('peserta', $data);
         redirect('panitia/peserta');

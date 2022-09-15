@@ -40,32 +40,132 @@
                                             <td><?= $row->tgl_mulai ?></td>
                                             <td><?= $row->tgl_selesai ?></td>
                                             <td><?= $row->jumlah ?></td>
-                                            <?php if ($row->status == 0) {
-                                            ?>
-                                                <td class="text-danger">Belum diverifikasi</td>
-                                            <?php } else { ?>
-                                                <td class="text-success">Sudah diverifikasi</td>
-                                            <?php } ?>
-                                            <td align="center">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="" class="btn btn-success btn-sm">
-                                                        <i class="mdi mdi-checkbox-marked-circle-outline"></i>
-                                                    </a>&emsp;
-                                                    <a href="<?= base_url('panitia/pembukaanlelang/detail/') . $row->lelang_id ?>" class="btn btn-warning btn-sm">
-                                                        <i class="mdi mdi-details"></i>
-                                                    </a>&emsp;
-                                                    <a href="<?= base_url('panitia/pembukaanlelang/hapus/') . $row->lelang_id ?>" onclick="return confirm('Yakin Hapus data')" class="btn btn-danger btn-sm">
-                                                        <i class="mdi mdi-delete-forever"></i>
-                                                    </a>
-                                                </div>
+                                            <td><?php
+                                                    if ($row->status == 0) {
+                                                        echo "<span class='badge badge-secondary'>Belum Diperiksa</span>";
+                                                    } else if ($row->status == 1) {
+                                                        echo "<span class='badge badge-success'>Telah Diperiksa</span>";
+                                                    }
+                                                    ?>
                                             </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-warning " data-toggle="modal" data-target="#editMenuModal<?= $row->lelang_id ?>"><i class="fas fa-edit"></i>Ubah</a>
+                                                <a href="#" class="btn btn-sm btn-danger " data-toggle="modal" data-target="#deletepenjualModal<?= $row->lelang_id ?>"><i class="fas fa-trash-can"></i>Hapus</a>
+                                                </a>
+                                            </td>
+                                            <!-- Edit Menu Modal -->
+                                            <div class="modal fade" id="editMenuModal<?= $row->lelang_id ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content bg-default">
+                                                        <div class="modal-header ">
+                                                            <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pembukaan Lelang</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body text-dark font-weight-bold">
+                                                            <form action="<?= base_url('panitia/pembukaanlelang/edit/' . $row->lelang_id) ?>" method="POST">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <label for="basic-url">ID Lelang </label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="lelang_id" id="lelang_id" value="<?= $row->lelang_id ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">ID Pelelang</label><br>
+                                                                            <div class="input-group mb-1">
+                                                                                <input type="text" class="form-control" name="peserta_id" id="peserta_id" value="<?= $row->pelelang_id ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">ID Panitia</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="email" value="<?= $row->panitia_id ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">Produk</label><br>
+                                                                            <div class="input-group mb-1">
+                                                                                <input type="text" class="form-control" name="tgl_diumumkan'" id="tgl_diumumkan'" value="<?= $row->produk ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Deskripsi Produk</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->deskripsi_produk ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Harga Awal</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->harga_awal ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                            <label for="basic-url">Harga Minimal Diterima</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="provinsi_kirim" id="provinsi_kirim" value="<?= $row->harga_minimal_diterima ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <label for="incremental_value">Kelipatan Minimal</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kota_kirim" id="kota_kirim" value="<?= $row->incremental_value ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Tanggal Mulai</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->tgl_mulai ?>" aria-describedby="basic-addon3" readonly>
+                                                                            </div>
+
+                                                                            <label for="basic-url">Gambar 1</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <img src="<?= base_url('assets/uploads/produk/' . $row->image1) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="gambar 1 <?= $row->image1 ?>">
+                                                                            </div>
+
+                                                                            <label for="basic-url">Gambar 2</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <img src="<?= base_url('assets/uploads/produk/' . $row->image2) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="gambar 2 <?= $row->image2 ?>">
+                                                                            </div>
+
+                                                                            <label for="basic-url">Gambar 3</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <img src="<?= base_url('assets/uploads/produk/' . $row->image3) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="gambar 3 <?= $row->image3 ?>">
+                                                                            </div>
+
+                                                                            <label for="basic-url">Gambar 4</label><br>
+                                                                            <div class="input-group mb-3">
+                                                                                <img src="<?= base_url('assets/uploads/produk/' . $row->image4) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="gambar 3     <?= $row->image4 ?>">
+                                                                            </div>
+                                                                            <label for="basic-url">Status</label><br>
+                                                                            <div class="input-group mb-1">
+                                                                                <select class="custom-select" name="status" id="status">
+                                                                                    <option value="<?= $row->status ?>"><?php
+                                                                                                                        if ($row->status == 0) {
+                                                                                                                            echo 'Belum Diperiksa';
+                                                                                                                        } else if ($row->status == 1) {
+                                                                                                                            echo 'Telah Diperiksa';
+                                                                                                                        } else {
+                                                                                                                            echo '';
+                                                                                                                        }
+                                                                                                                        ?></option>
+                                                                                    <option value="0">Belum Diperiksa</option>
+                                                                                    <option value="1">Telah Diperiksa</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                                </form>
+                                            </div>
                         </div>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                    </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
