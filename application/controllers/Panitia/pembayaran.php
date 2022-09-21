@@ -26,11 +26,16 @@ class Pembayaran extends CI_Controller
         $this->load->view('panitia/kelola_lelang/pembayaran', $data);
         $this->load->view('panitia/partials/end');
     }        
+
+    //Fungsi Delete
     public function delete($lelang_id)
     {
         $this->Panitia->deletePembayaran($lelang_id);
         redirect('panitia/pembayaran');
     }
+
+
+    //Fungsi Edit
     public function edit($id)
     {
         $this->form_validation->set_rules('status', 'Status Order', 'required');

@@ -19,19 +19,21 @@ class Suratpengiriman extends CI_Controller
             'title' => $page,
             'breadcrumb' => $page
         ];
-       
+
         $data['user'] = $this->Panitia->user_panitiaById($this->session->panitia_id);
         $this->load->view('panitia/partials/start', $data);
         $this->load->view('panitia/kelola_lelang/surat', $data);
         $this->load->view('panitia/partials/end');
     }
 
+    //Fungsi Delete
     public function delete($pengiriman_id)
     {
         $this->Panitia->deletePengiriman($pengiriman_id);
         redirect('panitia/suratpengiriman');
     }
-    
+
+    //Fungsi Edit
     public function edit($id)
     {
         $this->form_validation->set_rules('status_transaksi', 'Status Order', 'required');
@@ -44,104 +46,156 @@ class Suratpengiriman extends CI_Controller
             $this->session->set_flashdata('flash', '<div class="alert alert-success" role="alert">Order Berhasil Terupdate!</div>');
             redirect('panitia/suratpengiriman/');
         }
-
     }
-    public function VerifyEmail(){
-        if ($this->Panitia->sendEmail($this->input->post('email')))
-        {
+
+    //Fungsi Kirim Email
+    public function VerifyEmail()
+    {
+        if ($this->Panitia->sendEmail($this->input->post('email'))) {
             // successfully sent mail
-            $this->session->set_flashdata('msg','<script>alert("Success terkirim")</script>');
-            
-            redirect('panitia/surat'); 
-           
-        }
-        else
-        {
-            // error
-            $this->session->set_flashdata('msg','<script>alert("Gagal Terkirim")</script>');
-            
-            redirect('panitia/surat');
+            $this->session->set_flashdata('msg', '<script>alert("Success terkirim")</script>');
 
-            
+            redirect('panitia/suratpengiriman');
+        } else {
+            // error
+            $this->session->set_flashdata('msg', '<script>alert("Gagal Terkirim")</script>');
+
+            redirect('panitia/suratpengiriman');
         }
     }
 
-    // public function suratPerintah($pengiriman_id)
-    // {
-    //     $this->load->library('pdf');
-    //     $this->load->model('panitia/Panitia', 'lelang_pengiriman');
-    //     $beli = $this->Panitia->get_orders_by_id($pengiriman_id);
-    //     $detail_beli = $this->orders_model->get_detail_by_id($pengiriman_id);
-    //     $customer = $this->customer->getProfile();
-    //     $ongkirs =  $this->shipping->getOngkirInfo($beli->kota_kirim, $beli->kurir);
-    //     $ongkir = json_decode($ongkirs, true);
+    //  function upload_file(){
 
-    //     $pdf = new fpdf('P', 'mm', 'Letter');
-    //     $pdf->AddPage();
-    //     $image = "assets/img/logo.png";
-    //     $pdf->SetFont('Arial', 'B', 16);
-    //     $pdf->Cell(40, 40, $pdf->Image($image, $pdf->GetX(), $pdf->GetY(), 33.78), 0, 0, 'L', false);
-    //     $pdf->Cell(0, 4, '', 0, 1, 'C');
-    //     $pdf->Cell(0, 7, 'Nota Pembelian', 0, 1, 'C');
-    //     $pdf->SetFont('Arial', 'B', 8);
-    //     $pdf->Cell(0, 4, 'Jl. Imam Bonjol No.207, Kota Semarang, Semarang, Jawa Tengah 50949, Indonesia', 0, 1, 'C');
-    //     $pdf->Cell(0, 4, 'HP: +62 889-3319-886, EMAIL: lapakikan@gmail.com', 0, 1, 'C');
-    //     $pdf->Cell(10, 7, '', 0, 1);
-
-    //     $pdf->SetFont('Arial', 'B', 10);
-    //     $pdf->Cell(30, 6, 'Order Id', 0, 0, 'L');
-    //     $pdf->Cell(69, 6, $pengiriman_id, 0, 0, 'L');
-    //     $pdf->Cell(69, 6, 'Tanggal', 0, 0, 'R');
-    //     $pdf->Cell(30, 6, date('Y-m-d', mktime(date('m'), date('d'), date('Y'))), 0, 1, 'R');
-    //     $pdf->Cell(30, 6, 'Konsumen', 0, 0, 'L');
-    //     $pdf->Cell(69, 6, $customer->username, 0, 0, 'L');
-    //     $pdf->Cell(69, 6, 'Waktu', 0, 0, 'R');
-    //     $pdf->Cell(30, 6, date('H:i:s', mktime(date('H'), date('i'), date('s'))), 0, 1, 'R');
-    //     $pdf->Cell(10, 3, '', 0, 1);
-
-    //     $pdf->Cell(8, 6, 'No', 1, 0, 'C');
-    //     $pdf->Cell(100, 6, 'Nama Barang', 1, 0, 'C');
-    //     $pdf->Cell(30, 6, 'Harga Beli', 1, 0, 'R');
-    //     $pdf->Cell(30, 6, 'Jumlah Barang', 1, 0, 'R');
-    //     $pdf->Cell(30, 6, 'SubTotal', 1, 1, 'R');
-    //     $pdf->SetFont('Arial', '', 10);
-
-    //     $pdf->SetFont('Arial', 'B', 10);
-    //     $pdf->Cell(168, 6, "Total Pembelian", 1, 0, 'R');
-    //     $pdf->SetFont('Arial', '', 10);
-    //     $pdf->Cell(30, 6, "Rp " . number_format($beli->subtotal, 0, ".", "."), 1, 1, 'R');
-    //     $pdf->SetFont('Arial', 'B', 10);
-    //     $pdf->Cell(168, 6, "Biaya Pengiriman", 1, 0, 'R');
-    //     $pdf->SetFont('Arial', '', 10);
-    //     $pdf->Cell(30, 6, "Rp " . number_format($beli->ongkir, 0, ".", "."), 1, 1, 'R');
-    //     $pdf->SetFont('Arial', 'B', 12);
-    //     $pdf->Cell(163, 6, "Total Biaya", 0, 0, 'R');
-    //     $pdf->Cell(35, 6, "Rp " . number_format($beli->total_bayar, 0, ".", "."), 0, 1, 'R');
-
-    //     $pdf->Cell(35, 20, "", 0, 1, 'R');
-
-    //     $pdf->SetFont('Arial', 'B', 11);
-    //     $pdf->Cell(99, 6, "Alamat Pengiriman : ", 0, 0, 'L');
-    //     $pdf->Cell(99, 6, "Jasa Pengiriman : ", 0, 1, 'R');
-    //     $pdf->SetFont('Arial', '', 10);
-    //     $pdf->Cell(99, 6, $customer->nama, 0, 0, 'L');
-    //     $pdf->Cell(99, 6, $beli->expedisi, 0, 1, 'R');
-    //     $pdf->Cell(99, 6, $customer->telp, 0, 0, 'L');
-    //     $pdf->Cell(99, 6, $beli->wkt_pengiriman, 0, 1, 'R');
-    //     $pdf->Cell(99, 6, $beli->alamat_kirim, 0, 1, 'L');
-    //     $pdf->Cell(99, 6, $ongkir['rajaongkir']['destination_details']['city_name'] . ' - ' . $ongkir['rajaongkir']['destination_details']['province'], 0, 1, 'L');
-
-    //     $pdf->Cell(35, 15, "", 0, 1, 'R');
-    //     $pdf->SetFont('Arial', '', 12);
-    //     $pdf->Cell(198, 6, "Status Pembayaran", 0, 1, 'C');
-    //     $pdf->SetFont('Arial', 'B', 14);
-    //     if ($beli->status_bayar == 0) {
-    //         $hasil = "Belum Bayar";
-    //     } else {
-    //         $hasil = "Lunas";
+    //     $config['upload_path'] = 'assets/uploads/';
+    
+    //     $config['allowed_types'] = 'doc|docx|pdf'; //tipe file attach
+    
+    //     $this->load->library('upload', $config);
+    
+    //     if($this->upload->do_upload('resume')){
+    
+    //      return $this->upload->data();  
+    
+    //     }else{
+    
+    //      return $this->upload->display_errors();
+    
     //     }
-    //     $pdf->Cell(198, 6, "" . $hasil, 0, 1, 'C');
+    
+    //   }
 
-    //     $pdf->Output();
-    // }
+    public function suratPerintah()
+    {
+        $this->load->library('pdf');
+        // $this->load->model('Panitia/suratperintah');
+        $data =  $this->Panitia->suratperintah();
+        $pdf = new FPDF('l', 'mm', 'A5');
+        $pdf = new FPDF('P', 'pt', array(500,233));
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial', 'B', 16);
+        // mencetak string
+        $pdf->Cell(190, 7, 'SURAT PERINTAH PENGIRIMAN KE PEMENANG LELANG', 0, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 12);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10, 7, '', 0, 1);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(20, 6, ' ID Lelang ', 1, 0);
+        $pdf->Cell(85, 6, ' ID Peserta', 1, 0);
+        $pdf->Cell(27, 6, 'Tanggal Diumumkan', 1, 0, 'R');
+        $pdf->Cell(27, 6, date('Y-m-d', mktime(date('m'), date('d'), date('Y'))), 0, 1, 'R');
+        $pdf->Cell(27, 6, 'Tanggal Pembayaran', 1, 0, 'R');
+        $pdf->Cell(27, 6, date('Y-m-d', mktime(date('m'), date('d'), date('Y'))), 0, 1, 'R');
+        $pdf->Cell(25, 6, 'Bukti Pembayaran', 1, 1);
+        $pdf->Cell(25, 6, 'Konfirmasi Terima Produk', 1, 1);
+        $pdf->Cell(25, 6, 'Provinsi', 1, 1);
+        $pdf->Cell(25, 6, 'Kota', 1, 1);
+        $pdf->Cell(25, 6, 'Kecamatan', 1, 1);
+        $pdf->Cell(25, 6, 'Kelurahan', 1, 1);
+        $pdf->Cell(25, 6, 'Alamat', 1, 1);
+        $pdf->Cell(25, 6, 'Status Pembayaran', 1, 1);
+        $pdf->SetFont('Arial', '', 10);
+        // $mahasiswa['mahasiswa'] =  $this->Panitia->suratperintah();
+        foreach ($data as $row) {
+            $pdf->Cell(20, 6, $row['lelang_id'], 1, 0);
+            $pdf->Cell(85, 6, $row['peserta_id'], 1, 0);
+            $pdf->Cell(25, 6, $row['tgl_diumumkan'], 1, 1);
+            $pdf->Cell(25, 6, $row['tgl_bayar'], 1, 1);
+            $pdf->Cell(25, 6, $row['bukti_bayar'], 1, 1);
+            $pdf->Cell(25, 6, $row['konfirmasi_terimaproduk'], 1, 1);
+            $pdf->Cell(25, 6, $row['provinsi_kirim'], 1, 1);
+            $pdf->Cell(25, 6, $row['kota_kirim'], 1, 1);
+            $pdf->Cell(25, 6, $row['kecamatan_kirim'], 1, 1);
+            $pdf->Cell(25, 6, $row['kelurahan_kirim'], 1, 1);
+            $pdf->Cell(25, 6, $row['alamat_kirim'], 1, 1);
+            $pdf->Cell(25, 6, $row['tgl_diumumkan'], 1, 1);
+            $pdf->Cell(25, 6, $row['status'], 1, 1);
+        }
+        // $pdf->Output('attachment.pdf', 'S');
+
+// email stuff (change data below)
+$to = "lelangikan222@gmail.com"; 
+$from = "lelangikan222@gmail.com"; 
+$subject = "send email with pdf attachment"; 
+$message = "<p>Please see the attachment.</p>";
+
+// a random hash will be necessary to send mixed content
+$separator = md5(time());
+
+// carriage return type (we use a PHP end of line constant)
+$eol = PHP_EOL;
+
+// attachment name
+$filename = "test.pdf";
+
+// encode data (puts attachment in proper format)
+$pdfdoc = $pdf->Output("", "S");
+$attachment = $pdfdoc;
+
+// main header
+$headers  = "From: ".$from.$eol;
+$headers .= "MIME-Version: 1.0".$eol; 
+$headers .= "Content-Type: multipart/mixed; boundary=\"".$separator."\"";
+
+// no more headers after this, we start the body! //
+
+$body = "--".$separator.$eol;
+$body .= "Content-Transfer-Encoding: 7bit".$eol.$eol;
+$body .= "This is a MIME encoded message.".$eol;
+
+// message
+$body .= "--".$separator.$eol;
+$body .= "Content-Type: text/html; charset=\"iso-8859-1\"".$eol;
+$body .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+$body .= $message.$eol;
+
+// attachment
+$body .= "--".$separator.$eol;
+$body .= "Content-Type: application/octet-stream; name=\"".$filename."\"".$eol; 
+$body .= "Content-Transfer-Encoding: base64".$eol;
+$body .= "Content-Disposition: attachment".$eol.$eol;
+$body .= $attachment.$eol;
+$body .= "--".$separator."--";
+
+//configure email settings
+$config['protocol'] = 'smtp';
+$config['smtp_host'] = 'ssl://smtp.googlemail.com'; //smtp host name
+$config['smtp_port'] = '465'; //smtp port number
+$config['smtp_user'] = 'lelangikan222@gmail.com';
+$config['smtp_pass'] = 'kbjidqivoreymhud'; //$from_email password
+$config['mailtype'] = 'html';
+$config['charset'] = 'iso-8859-1';
+$config['wordwrap'] = TRUE;
+$config['newline'] = "\r\n"; //use double quotes
+$this->email->initialize($config);
+
+//send mail
+$this->email->from($from, 'Lelang Ikan');
+$this->email->to($to);
+$this->email->subject($headers);
+$this->email->subject($subject);
+$this->email->message($body);
+return $this->email->send();
+    }
 }

@@ -25,21 +25,8 @@ class Pelelang extends CI_Controller
         $this->load->view('panitia/kelola_lelang/pelelang', $data);
         $this->load->view('panitia/partials/end');
     }
-    function detail($pelelang_id)
-    {
-        $detailData = $this->Panitia->user_pelelang($pelelang_id);
-        $page = 'Detail Data Pelelang';
-        $data = [
-            'pelelang' => $detailData,
-            'title' => $page,
-            'breadcrumb' => $page
-        ];
-        $data['user'] = $this->Panitia->user_panitiaById($this->session->panitia_id);
-        $this->load->view('panitia/partials/start', $data);
-        $this->load->view('panitia/kelola_lelang/detailpelelang', $data);
-        $this->load->view('panitia/partials/end');
-    }
 
+    //Fungsi Edit
     public function edit($id)
     {
         $id = $this->uri->segment(4);
@@ -50,7 +37,7 @@ class Pelelang extends CI_Controller
         $this->db->update('pelelang', $data);
         redirect('panitia/pelelang');
     }
-
+    //Fungsi Delete
     public function hapusPelelang($id)
     {
         $this->Panitia->hapusDataPelelang($id);

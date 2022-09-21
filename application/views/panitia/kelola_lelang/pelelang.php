@@ -67,7 +67,7 @@
                                                 <div class="modal-dialog modal-xl">
                                                     <div class="modal-content bg-default">
                                                         <div class="modal-header ">
-                                                            <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail PeLelang</h5>
+                                                            <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pelelang</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>

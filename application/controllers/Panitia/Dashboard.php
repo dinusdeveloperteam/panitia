@@ -16,7 +16,7 @@ class Dashboard extends CI_Controller
             'title' => $page,
             'breadcrumb' => $page 
         ];
-        //$data['user'] = $this->db->query('select * from panitia where nama = "'.$_SESSION['nama'].'"')->row();
+     
         $data['user'] = $this->Panitia->user_panitiaById($this->session->panitia_id);
         $this->load->view('panitia/partials/start', $data);
         $this->load->view('panitia/index', $data);

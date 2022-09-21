@@ -69,7 +69,7 @@
             <a class="nav-link" data-toggle="collapse" href="#pengiriman" aria-expanded="false" aria-controls="ui-basic1">
                 <span class="menu-title">Pengiriman</span>
                 <i class="menu-arrow"></i>
-                <i class="mdi mdi-wallet menu-icon"></i>
+                <i class="mdi mdi-truck-delivery menu-icon"></i>
             </a>
             <div class="collapse" id="pengiriman">
                 <ul class="nav flex-column sub-menu">

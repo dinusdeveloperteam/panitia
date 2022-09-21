@@ -10,6 +10,8 @@ class Profile extends CI_Controller{
 		$this->load->library('form_validation'); 
 		$this->load->helper('url','form');
 	}  
+
+	//Fungsi Index
 	public function index(){
 		$page = 'Kelola Akun';
         $data = [
@@ -24,6 +26,7 @@ class Profile extends CI_Controller{
         $this->load->view('panitia/partials/end');
 	}
 
+	//Fungsi Edit Data
 	public function halaman_edit($id)
 	{
 		$this->form_validation->set_rules('nama','nama','required');
@@ -71,6 +74,7 @@ class Profile extends CI_Controller{
      	}
 	} 
 
+	//Fungsi Edit Password
 	public function halaman_edit_password($id)
 	{
 		$this->form_validation->set_rules('oldpassw','oldpassw','required');

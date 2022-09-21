@@ -26,6 +26,8 @@ class Penerima extends CI_Controller
         $this->load->view('panitia/partials/end');
     }
 
+
+    //Fungsi Edit
     public function edit($id)
     {
         $this->form_validation->set_rules('konfirmasi_terimaproduk', 'Status Order', 'required');
@@ -42,6 +44,8 @@ class Penerima extends CI_Controller
 
     }
 
+
+    //Fungsi Delete
     public function delete($peserta_id)
     {
         $this->Panitia->deletePenerima($peserta_id);

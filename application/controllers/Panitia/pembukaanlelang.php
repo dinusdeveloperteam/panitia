@@ -31,16 +31,13 @@ class Pembukaanlelang extends CI_Controller
 
     public function edit($id)
     {
-        // $data['order'] = $this->transaksi->getOrderById($id);
-        // $data['id'] = $id;
+       
         $this->form_validation->set_rules('status', 'Status Order', 'required');
-        // $this->form_validation->set_rules('konfirmasi_terimaproduk', 'Status Order', 'required');
-        // $this->form_validation->set_rules('bukti', 'Bukti Transfer Penarikan', 'required');
+        
         if ($this->form_validation->run() == false) {
             redirect('panitia/pembukaanlelang/');
         } else {
             $this->db->set('status', $this->input->post('status', true));
-            // $this->db->set('konfirmasi_terimaproduk', $this->input->post('konfirmasi_terimaproduk', true));
             $this->db->where('lelang_id', $id);
             $this->db->update('lelang');
             $this->session->set_flashdata('flash', '<div class="alert alert-success" role="alert">Order Berhasil Terupdate!</div>');  
@@ -62,6 +59,7 @@ class Pembukaanlelang extends CI_Controller
         redirect('panitia/pembukaanlelang');
     }
 
+    //Fungsi Delete
     public function hapus($id)
     {
         $this->Panitia->hapusDataPembukaanLelang($id);

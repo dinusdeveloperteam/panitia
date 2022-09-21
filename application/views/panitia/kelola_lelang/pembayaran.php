@@ -42,7 +42,7 @@
                                                     if ($v['status'] == 0) {
                                                         echo "<span class='badge badge-secondary'>Belum Dibayar</span>";
                                                     } else if ($v['status'] == 1) {
-                                                        echo "<span class='badge badge-success'>Telah Diperiksa</span>";
+                                                        echo "<span class='badge badge-success'>Telah Dibayar</span>";
                                                     } else if ($v['status'] == 2) {
                                                         echo "<span class='badge badge-danger'>Ditolak</span>";
                                                     }else{

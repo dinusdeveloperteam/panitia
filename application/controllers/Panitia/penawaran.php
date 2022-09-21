@@ -25,17 +25,21 @@ class Penawaran extends CI_Controller
         $this->load->view('panitia/kelola_lelang/penawaran', $data);
         $this->load->view('panitia/partials/end');
     }
+
+    //Fungsi Delete
     public function deletepenawaran($id)
     {
         $this->panitia->deletepenawaran($id);
         redirect('panitia/kelola_lelang/penawaran');
     }
+
+    //Fungsi Edit
     public function edit($id)
     {
-        // $data['order'] = $this->transaksi->getOrderById($id);
+        
         $data['id'] = $id;
         $this->form_validation->set_rules('status', 'Status Order', 'required');
-        // $this->form_validation->set_rules('bukti', 'Bukti Transfer Penarikan', 'required');
+        
         if ($this->form_validation->run() == false) {
             redirect('panitia/kelola_lelang/penawaran/');
         } else {

@@ -9,6 +9,8 @@ class Peserta extends CI_Controller
         $this->load->model('panitia/Panitia');
         $this->load->helper('url');
     }
+
+    //Fungsi Index
     public function index()
     {
         $TampilData = $this->Panitia->peserta();
@@ -24,21 +26,8 @@ class Peserta extends CI_Controller
         $this->load->view('panitia/kelola_lelang/peserta', $data);
         $this->load->view('panitia/partials/end');
     }
-    function detail($peserta_id)
-    {
-        $peserta_id = $this->uri->segment(4);
-        $detailData = $this->Panitia->user_peserta($peserta_id);
-        $page = 'Detail Peserta Lelang';
-        $data = [
-            'peserta' => $detailData,
-            'title' => $page,
-            'breadcrumb' => $page
-        ];
-        $data['user'] = $this->Panitia->user_panitiaById($this->session->panitia_id);
-        $this->load->view('panitia/partials/start', $data);
-        $this->load->view('panitia/kelola_lelang/detailpeserta', $data);
-        $this->load->view('panitia/partials/end');
-    }
+
+    //Fungsi Edit
     public function edit($id)
     {
         $id = $this->uri->segment(4);
@@ -51,6 +40,8 @@ class Peserta extends CI_Controller
         redirect('panitia/peserta');
     }
 
+
+    //Fungsi Delete
     public function hapusPeserta($peserta_id)
     {
         $this->Panitia->hapusDataPeserta($peserta_id);
