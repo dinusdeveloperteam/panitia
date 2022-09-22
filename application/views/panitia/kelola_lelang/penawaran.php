@@ -58,13 +58,13 @@
                                         <div class="modal fade" id="editMenuModal<?= $row['lelang_id'] ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content bg-default">
-                                                    <div class="modal-header ">
+                                                    <div class="modal-header bg-white">
                                                         <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Penawaran Lelang</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body text-dark font-weight-bold">
+                                                    <div class="modal-body text-dark font-weight-bold bg-white">
                                                         <?php
                                                         ?>
                                                         <form action="<?= base_url('panitia/penawaran/edit/' . $row['lelang_id']) ?>" method="POST">
@@ -78,21 +78,21 @@
 
                                                                         <label for="basic-url">Produk</label><br>
                                                                         <div class="input-group mb-1">
-                                                                            <input type="text" class="form-control" name="peserta_id" id="peserta_id" value="<?= $row['produk'] ?>" aria-describedby="basic-addon3" readonly>
+                                                                            <input type="text" class="form-control" name="produk" id="produk" value="<?= $row['produk'] ?>" aria-describedby="basic-addon3" readonly>
                                                                         </div><br>
 
 
 
                                                                         <label for="basic-url">Deskripsi Produk</label><br>
                                                                         <div class="input-group mb-1">
-                                                                            <input type="text" class="form-control" name="nama_peserta" id="nama_peserta" value="<?= $row['deskripsi_produk'] ?>" aria-describedby="basic-addon3" readonly>
+                                                                            <input type="text" class="form-control" name="deskripsi_produk" id="deskripsi_produk" value="<?= $row['deskripsi_produk'] ?>" aria-describedby="basic-addon3" readonly>
                                                                         </div><br>
 
 
 
                                                                         <label for="basic-url">Harga Beli Sekarang</label><br>
                                                                         <div class="input-group mb-1">
-                                                                            <input type="text" class="form-control" name="nama_produk" id="nama_produk" value="<?= $row['harga_beli_sekarang'] ?>" aria-describedby="basic-addon3" readonly>
+                                                                            <input type="text" class="form-control" name="harga_beli_sekarang" id="harga_beli_sekarang" value="<?= $row['harga_beli_sekarang'] ?>" aria-describedby="basic-addon3" readonly>
                                                                         </div><br>
 
 
@@ -105,7 +105,7 @@
 
                                                                         <label for="basic-url">Harga Tawar</label>
                                                                         <div class="input-group mb-3">
-                                                                            <input type="text" class="form-control" name="tanggal_pembayaran" id="tanggal_pembayaran" value="<?= $row['harga_tawar'] ?>" aria-describedby="basic-addon3" readonly>
+                                                                            <input type="text" class="form-control" name="harga_tawar" id="harga_tawar" value="<?= $row['harga_tawar'] ?>" aria-describedby="basic-addon3" readonly>
                                                                         </div>
 
 

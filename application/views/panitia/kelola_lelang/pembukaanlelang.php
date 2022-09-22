@@ -57,13 +57,13 @@
                                             <div class="modal fade" id="editMenuModal<?= $row->lelang_id ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl">
                                                     <div class="modal-content bg-default">
-                                                        <div class="modal-header ">
+                                                        <div class="modal-header bg-white">
                                                             <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pembukaan Lelang</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body text-dark font-weight-bold">
+                                                        <div class="modal-body text-dark font-weight-bold bg-white">
                                                             <form action="<?= base_url('panitia/pembukaanlelang/edit/' . $row->lelang_id) ?>" method="POST">
                                                                 <div class="modal-body">
                                                                     <div class="row">
@@ -75,40 +75,40 @@
 
                                                                             <label for="basic-url">ID Pelelang</label><br>
                                                                             <div class="input-group mb-1">
-                                                                                <input type="text" class="form-control" name="peserta_id" id="peserta_id" value="<?= $row->pelelang_id ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="pelelang_id" id="pelelang_id" value="<?= $row->pelelang_id ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">ID Panitia</label>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="email" value="<?= $row->panitia_id ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="panitia_id" id="panitia_id" value="<?= $row->panitia_id ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">Produk</label><br>
                                                                             <div class="input-group mb-1">
-                                                                                <input type="text" class="form-control" name="tgl_diumumkan'" id="tgl_diumumkan'" value="<?= $row->produk ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="produk" id="produk" value="<?= $row->produk ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Deskripsi Produk</label>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->deskripsi_produk ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="deskripsi_produk" id="deskripsi_produk" value="<?= $row->deskripsi_produk ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Harga Awal</label>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->harga_awal ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="harga_awal" id="harga_awal" value="<?= $row->harga_awal ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">Harga Minimal Diterima</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="provinsi_kirim" id="provinsi_kirim" value="<?= $row->harga_minimal_diterima ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="harga_minimal_diterima" id="harga_minimal_diterima" value="<?= $row->harga_minimal_diterima ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <label for="incremental_value">Kelipatan Minimal</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kota_kirim" id="kota_kirim" value="<?= $row->incremental_value ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="incremental_value" id="incremental_value" value="<?= $row->incremental_value ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Tanggal Mulai</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->tgl_mulai ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="tgl_mulai" id="tgl_mulai" value="<?= $row->tgl_mulai ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Gambar 1</label><br>
@@ -139,7 +139,7 @@
                                                                                                                         } else if ($row->status == 1) {
                                                                                                                             echo 'Telah Diperiksa';
                                                                                                                         } else {
-                                                                                                                            echo '';
+                                                                                                                            echo 'Unknown';
                                                                                                                         }
                                                                                                                         ?></option>
                                                                                     <option value="0">Belum Diperiksa</option>
@@ -150,11 +150,11 @@
                                                                     </div>
                                                                 </div>
                                                         </div>
+                                                        <div class="modal-footer bg-white">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-success">Simpan</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                                 </form>
                                             </div>

@@ -65,13 +65,13 @@
                                             <div class="modal fade" id="editMenuModal<?= $row->peserta_id ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl">
                                                     <div class="modal-content bg-default">
-                                                        <div class="modal-header ">
+                                                        <div class="modal-header bg-white">
                                                             <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Peserta Lelang</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body text-dark font-weight-bold">
+                                                        <div class="modal-body text-dark font-weight-bold bg-white">
                                                             <form action="<?= base_url('panitia/peserta/edit/' . $row->peserta_id) ?>" method="POST">
                                                                 <div class="modal-body">
                                                                     <div class="row">
@@ -82,15 +82,15 @@
                                                                             </div>
 
                                                                             <label for="basic-url">Nama</label><br>
-                                                                            <div class="input-group mb-1">
-                                                                                <input type="text" class="form-control" name="peserta_id" id="peserta_id" value="<?= $row->nama ?>" aria-describedby="basic-addon3" readonly>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" name="nama" id="nama" value="<?= $row->nama ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">Username</label>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="email" value="<?= $row->username ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="username" id="username" value="<?= $row->username ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">Jenis Kelamin</label><br>
-                                                                            <div class="input-group mb-1">
+                                                                            <div class="input-group mb-3">
                                                                                 <select class="custom-select" name="jeniskel" id="jeniskel">
                                                                                     <option value="<?= $row->jeniskel ?>"><?php
                                                                                                                             if ($row->jeniskel == 'L') {
@@ -105,47 +105,47 @@
                                                                             </div>
                                                                             <label for="basic-url">NIK</label>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->nik ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="nik" id="nik" value="<?= $row->nik ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">TELP</label>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="tgl_bayar" id="tgl_bayar" value="<?= $row->telp ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="telp" id="telp" value="<?= $row->telp ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">Email</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="provinsi_kirim" id="provinsi_kirim" value="<?= $row->email ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="email" id="email" value="<?= $row->email ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-6">
                                                                             <label for="incremental_value">Kelurahan</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kota_kirim" id="kota_kirim" value="<?= $row->kelurahan ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="kelurahan" id="kelurahan" value="<?= $row->kelurahan ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Kecamatan</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->kecamatan ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="kecamatan" id="kecamatan" value="<?= $row->kecamatan ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Kota</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->kota ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="kota" id="kota" value="<?= $row->kota ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Provinsi</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->provinsi ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="provinsi" id="provinsi" value="<?= $row->provinsi ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Alamat</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->alamat ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="alamat" id="alamat" value="<?= $row->alamat ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
 
                                                                             <label for="basic-url">Nomor NPWP</label><br>
                                                                             <div class="input-group mb-3">
-                                                                                <input type="text" class="form-control" name="kecamatan_kirim" id="kecamatan_kirim" value="<?= $row->npwp ?>" aria-describedby="basic-addon3" readonly>
+                                                                                <input type="text" class="form-control" name="npwp" id="npwp" value="<?= $row->npwp ?>" aria-describedby="basic-addon3" readonly>
                                                                             </div>
                                                                             <label for="basic-url">File KTP</label><br>
                                                                             <div class="input-group mb-3">
@@ -156,7 +156,7 @@
                                                                                 <img src="<?= base_url('assets/uploads/peserta/' . $row->filenpwp) ?>" class="img-thumbnail thumbnail zoom" width="200px" alt="File NPWP <?= $row->filenpwp ?>">
                                                                             </div>
                                                                             <label for="basic-url">Status Dibayarkan</label><br>
-                                                                            <div class="input-group mb-1">
+                                                                            <div class="input-group mb-3">
                                                                                 <select class="custom-select" name="status" id="status">
                                                                                     <option value="<?= $row->status ?>"><?php
                                                                                                                         if ($row->status == 0) {
@@ -181,11 +181,11 @@
                                                                     </div>
                                                                 </div>
                                                         </div>
+                                                        <div class="modal-footer bg-white">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-success">Simpan</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                                 </form>
                                             </div>

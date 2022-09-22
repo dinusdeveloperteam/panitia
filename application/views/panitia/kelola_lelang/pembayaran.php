@@ -55,13 +55,13 @@
                                                 <div class="modal fade" id="editMenuModal<?= $v['lelang_id'] ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content bg-default">
-                                                            <div class="modal-header ">
+                                                            <div class="modal-header bg-white">
                                                                 <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pembayaran Lelang</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body text-dark font-weight-bold">
+                                                            <div class="modal-body text-dark font-weight-bold bg-white">
                                                                 <form action="<?= base_url('panitia/pembayaran/edit/' . $v['lelang_id']) ?>" method="POST">
                                                                     <div class="modal-body">
                                                                         <div class="row">
@@ -80,13 +80,13 @@
                                                                                 </div><br>
                                                                                 <label for="basic-url">Nama Produk</label><br>
                                                                                 <div class="input-group mb-1">
-                                                                                    <input type="text" class="form-control" name="nama_produk" id="nama_produk" value="<?= $v['produk'] ?>" aria-describedby="basic-addon3" readonly>
+                                                                                    <input type="text" class="form-control" name="produk" id="produk" value="<?= $v['produk'] ?>" aria-describedby="basic-addon3" readonly>
                                                                                 </div><br>
                                                                             </div>
                                                                             <div class="col-6">
                                                                                 <label for="basic-url">Tanggal Pembayaran</label>
                                                                                 <div class="input-group mb-3">
-                                                                                    <input type="text" class="form-control" name="tanggal_pembayaran" id="tanggal_pembayaran" value="<?= $v['tgl_pembayaran'] ?>" aria-describedby="basic-addon3" readonly>
+                                                                                    <input type="text" class="form-control" name="tgl_pembayaran" id="tgl_pembayaran" value="<?= $v['tgl_pembayaran'] ?>" aria-describedby="basic-addon3" readonly>
                                                                                 </div>
                                                                                 <label for="basic-url">Nominal Dibayarkan</label><br>
                                                                                 <div class="input-group mb-1">

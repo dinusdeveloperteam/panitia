@@ -51,13 +51,13 @@
                                         <div class="modal fade" id="editMenuModal<?= $row['lelang_id'] ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content bg-default">
-                                                    <div class="modal-header ">
+                                                    <div class="modal-header bg-white">
                                                         <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail </h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body text-dark font-weight-bold">
+                                                    <div class="modal-body text-dark font-weight-bold bg-white">
                                                         <form action="<?= base_url('panitia/suratpengiriman/edit/') . $row['lelang_id'] ?>" method="POST">
                                                             <div class="modal-body">
                                                                 <div class="row">
@@ -99,7 +99,6 @@
                                                                         <div class="input-group mb-3">
                                                                             <input type="text" class="form-control" name="no_telp_driver" id="no_telp_driver" value="<?= $row['no_telp_driver'] ?>" aria-describedby="basic-addon3" readonly>
                                                                         </div><br>
-
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <label for="basic-url">Provinsi</label>
@@ -170,14 +169,14 @@
                                         <div class="modal fade" id="notifEmail" tabindex="-1" role="dialog" aria-labelledby="loginpelelangLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header bg-white">
                                                         <h5 class="modal-title" id="exampleModalLabel">Kirim Notifikasi Email Pelelang</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <form action="<?= base_url('Panitia/suratpengiriman/VerifyEmail/') ?>" method="post">
-                                                        <div class="modal-body">
+                                                        <div class="modal-body bg-white">
                                                             <div class="form-group">
                                                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" ?>
                                                             </div>
@@ -195,11 +194,11 @@
                                         <div class="modal fade" id="deletepenjualModal<?= $row['pengiriman_id'] ?>" tabindex="-1" aria-labelledby="deletepenjualModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content bg-light">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header bg-white">
                                                         <h5 class="modal-title" id="deletepenjualModalLabel">Hapus Pembayaran</h5>
                                                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body bg-white">
                                                         <h4>Yakin ingin menghapus Pembayaran dengan ID </h4>
                                                     </div>
                                                     <div class="modal-footer">

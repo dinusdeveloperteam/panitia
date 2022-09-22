@@ -55,13 +55,13 @@
                                                 <div class="modal fade" id="editMenuModal<?= $v['lelang_id'] ?>" tabindex="-1" aria-labelledby="editOrderModal" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content bg-default">
-                                                            <div class="modal-header ">
+                                                            <div class="modal-header bg-white">
                                                                 <h5 class="modal-title font-weight-bold" id="editOrderModal">Detail Pembayaran Lelang</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body text-dark font-weight-bold">
+                                                            <div class="modal-body text-dark font-weight-bold bg-white">
                                                                 <form action="<?= base_url('panitia/pembayaran/edit/' . $v['lelang_id']) ?>" method="POST">
                                                                     <div class="modal-body">
                                                                         <div class="row">
@@ -120,9 +120,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal-footer">
+                                                                    <div class="modal-footer bg-white">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                        <button type="submit" class="btn btn-success">Simpan</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
